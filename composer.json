@@ -1,5 +1,5 @@
 {
-  "name": "alex-kudrya/LaraThumb",
+  "name": "alex-kudrya/lara-thumb",
   "description": "A simple lite script that make thumbnails from original images",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -10,7 +10,7 @@
     }
   ],
   "autoload": {
-    "psr-4": {"kudrya\\lara-thumb\\": "src/"}
+    "psr-4": {"alex-kudrya\\lara-thumb\\": "src/"}
   },
   "require": {
     "ext-gd": "*",
