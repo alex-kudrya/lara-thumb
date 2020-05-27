@@ -1,0 +1,20 @@
+{
+  "name": "alex-kudrya/LaraThumb",
+  "description": "A simple lite script that make thumbnails from original images",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Alexander Kudrya",
+      "email": "alexkudrya91@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"kudrya\\lara-thumb\\": "src/"}
+  },
+  "require": {
+    "ext-gd": "*",
+    "php": "^7.0",
+    "illuminate/http": "^5.1|^6"
+  }
+}
