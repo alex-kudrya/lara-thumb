@@ -1,5 +1,5 @@
 # lara-thumb
-[![Total Downloads](https://poser.pugx.org/alex-kudrya/lara-thumb/downloads)](//packagist.org/packages/alex-kudrya/lara-thumb) [![Latest Unstable Version](https://poser.pugx.org/alex-kudrya/lara-thumb/v/unstable)](//packagist.org/packages/alex-kudrya/lara-thumb) 
+[![Total Downloads](https://poser.pugx.org/alex-kudrya/lara-thumb/downloads)](//packagist.org/packages/alex-kudrya/lara-thumb) [![Version](https://poser.pugx.org/alex-kudrya/lara-thumb/version)](//packagist.org/packages/alex-kudrya/lara-thumb)
 [![License](https://poser.pugx.org/alex-kudrya/lara-thumb/license)](//packagist.org/packages/alex-kudrya/lara-thumb)
 
 This script converts the original image into a thumbnail with the given sizes and various modes
