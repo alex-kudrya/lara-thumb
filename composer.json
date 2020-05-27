@@ -2,6 +2,7 @@
   "name": "alex-kudrya/lara-thumb",
   "description": "A simple lite script that make thumbnails from original images",
   "minimum-stability": "stable",
+  "homepage": "https://github.com/alex-kudrya/lara-thumb",
   "license": "MIT",
   "authors": [
     {
@@ -10,7 +11,9 @@
     }
   ],
   "autoload": {
-    "psr-4": {"alex-kudrya\\lara-thumb\\": "src/"}
+    "psr-4": {
+      "Kudrya\\LaraThumb\\": "src/"
+    }
   },
   "require": {
     "ext-gd": "*",
