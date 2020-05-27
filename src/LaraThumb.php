@@ -120,13 +120,10 @@ class LaraThumb
 
         // Create new image
         $image_p = imagecreatetruecolor($_width, $_height);
-        if ($mode === 'cover')
-        {
+        if ($mode === 'cover') {
             $black_p = imagecolorallocate($image_p, 0, 0, 0);
             imagecolortransparent($image_p, $black_p);
-        }
-        elseif ($mode === 'contain')
-        {
+        } elseif ($mode === 'contain') {
             $white = imagecolorallocate($image_p, 255, 255, 255);
             imagefill($image_p, 0, 0, $white);
         }
