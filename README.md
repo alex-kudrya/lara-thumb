@@ -10,7 +10,8 @@ Modes: 'cover', 'contain'.
 
 ```PHP
 
-use kudrya/LaraThumb/LaraThumb
+use Illuminate\Http\Request;
+use kudrya\LaraThumb\LaraThumb
 
 class MakeThumbnail()
 {
