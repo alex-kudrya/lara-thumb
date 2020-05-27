@@ -1,2 +1,3 @@
 # lara-thumb
-[![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/v)](//packagist.org/packages/phpunit/phpunit) [![Total Downloads](https://poser.pugx.org/phpunit/phpunit/downloads)](//packagist.org/packages/phpunit/phpunit) [![Latest Unstable Version](https://poser.pugx.org/phpunit/phpunit/v/unstable)](//packagist.org/packages/phpunit/phpunit) [![License](https://poser.pugx.org/phpunit/phpunit/license)](//packagist.org/packages/phpunit/phpunit)
+[![Total Downloads](https://poser.pugx.org/alex-kudrya/lara-thumb/downloads)](//packagist.org/packages/alex-kudrya/lara-thumb) [![Latest Unstable Version](https://poser.pugx.org/alex-kudrya/lara-thumb/v/unstable)](//packagist.org/packages/alex-kudrya/lara-thumb) 
+[![License](https://poser.pugx.org/alex-kudrya/lara-thumb/license)](//packagist.org/packages/alex-kudrya/lara-thumb)
