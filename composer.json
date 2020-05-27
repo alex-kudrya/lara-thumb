@@ -1,8 +1,8 @@
 {
   "name": "alex-kudrya/lara-thumb",
   "description": "A simple lite script that make thumbnails from original images",
-  "minimum-stability": "stable",
-  "license": "proprietary",
+  "minimum-stability": "dev",
+  "license": "MIT",
   "authors": [
     {
       "name": "Alexander Kudrya",
