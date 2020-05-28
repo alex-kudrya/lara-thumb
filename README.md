@@ -5,6 +5,7 @@
 This script converts the original image into a thumbnail with the given sizes and various modes
 
 Modes: 'cover', 'contain'.
+Available extensions: 'jpg/jpeg', 'png', 'gif'.
 
 ## Example
 
@@ -19,6 +20,10 @@ class MakeThumbnail()
   {
     $file = $request->file('image');
     LaraThumb::processing($file, $width, $height, 'cover')
+    
+    // That's all, your image was reduced!
+    // Then save the $file or do what you need with it...
+    
   }
 };
 ```
