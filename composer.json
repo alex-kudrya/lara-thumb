@@ -1,13 +1,16 @@
 {
   "name": "alex-kudrya/lara-thumb",
   "description": "A simple lite script that make thumbnails from original images",
+  "type": "library",
+  "time": "2020-05-27",
   "minimum-stability": "stable",
   "homepage": "https://github.com/alex-kudrya/lara-thumb",
   "license": "MIT",
   "authors": [
     {
       "name": "Alexander Kudrya",
-      "email": "alexkudrya91@gmail.com"
+      "email": "alexkudrya91@gmail.com",
+      "role": "developer"
     }
   ],
   "autoload": {
