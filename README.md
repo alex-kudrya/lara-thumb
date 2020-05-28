@@ -5,6 +5,7 @@
 This script converts the original image into a thumbnail with the given sizes and various modes
 
 Modes: 'cover', 'contain'.
+
 Available extensions: 'jpg/jpeg', 'png', 'gif'.
 
 ## Example
