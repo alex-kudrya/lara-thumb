@@ -17,7 +17,7 @@
   },
   "require": {
     "ext-gd": "*",
-    "php": "^7.0",
+    "php": "^7.3",
     "illuminate/http": "*"
   }
 }
