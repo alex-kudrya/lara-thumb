@@ -1,13 +1,13 @@
 <?php
 
 
-namespace kudrya\LaraThumb;
+namespace Kudrya\LaraThumb;
 
 use Illuminate\Http\UploadedFile;
 
 /**
  * Class LaraThumb
- * @package kudrya\LaraThumb;
+ * @package Kudrya\LaraThumb;
  */
 class LaraThumb
 {
@@ -18,26 +18,26 @@ class LaraThumb
      * in the center of the image. If the proportions of original image are not
      * equal needle then the image is trimmed to the correct proportions
      *
-     * @author Alex Kudrya <alexkudrya91@gmail.com>
+     * @param UploadedFile $file
+     * @param integer $width
+     * @param integer $height
+     * @param string [$mode] One of processing modes: "cover", "contain"
+     * @author Alexander Kudrya <alexkudrya91@gmail.com>
      * @since 05.05.2018
      * @update 18.06.2018 Added contain mode
      * @update 03.03.2019 Fixed bug in cover mode
      *
-     * @param UploadedFile $_file
-     * @param integer $_width
-     * @param integer $_height
-     * @param string [$mode] One of processing modes: "cover", "contain"
      */
-    public static function processing(UploadedFile $_file, int $_width, int $_height, string $mode = 'cover')
+    public static function processing(UploadedFile $file, int $width, int $height, string $mode = 'cover')
     {
-        $extension = strtolower($_file->extension());
-        $filename = $_file->path();
+        $extension = strtolower($file->extension());
+        $filename = $file->path();
 
         if (!in_array($mode, self::MODES)) {
             die ( "Invalid image processing mode." );
         }
 
-        list ($src_width, $src_height) = self::getOriginalSizes($_file);
+        list ($src_width, $src_height) = self::getOriginalSizes($file);
 
         // Calculate new image sizes
 
@@ -47,32 +47,32 @@ class LaraThumb
         $src_offset_Y = 0;
 
         if ($mode === 'cover') { // Cover mode
-            $proportions = $_width / $_height;
+            $proportions = $width / $height;
 
-            if ($src_width < $_width) {
+            if ($src_width < $width) {
                 $dst_width = $src_width;
-                $_width = $dst_width;
-                $dst_height = $_width / $proportions;
-                $_height = $dst_height;
+                $width = $dst_width;
+                $dst_height = $width / $proportions;
+                $height = $dst_height;
             }
 
-            if ($src_height < $_height) {
+            if ($src_height < $height) {
                 $dst_height = $src_height;
-                $_height = $dst_height;
-                $dst_width = $_height * $proportions;
-                $_width = $dst_width;
+                $height = $dst_height;
+                $dst_width = $height * $proportions;
+                $width = $dst_width;
             }
 
-            if (($src_width / $_width) > ($src_height / $_height)) {
-                $dst_width = $_width;
-                $dst_height = $_height;
+            if (($src_width / $width) > ($src_height / $height)) {
+                $dst_width = $width;
+                $dst_height = $height;
                 $old_width_orig = $src_width;
                 $src_width = $src_height * $proportions;
                 $src_offset_X = ($old_width_orig - $src_width) / 2;
                 $src_offset_Y = 0;
             } else {
-                $dst_width = $_width;
-                $dst_height = $_height;
+                $dst_width = $width;
+                $dst_height = $height;
                 $old_height_orig = $src_height;
                 $src_height = $src_width / $proportions;
                 $src_offset_Y = ($old_height_orig - $src_height) / 2;
@@ -86,31 +86,31 @@ class LaraThumb
             $srcProportions = $src_width / $src_height;
             $dst_width = $dst_height = 0;
 
-            if ($src_width != $_width) {
-                $dst_width = $_width;
-                $dst_height = $_width / $srcProportions;
-                $dst_offset_Y = ($_height - $dst_height) / 2;
+            if ($src_width != $width) {
+                $dst_width = $width;
+                $dst_height = $width / $srcProportions;
+                $dst_offset_Y = ($height - $dst_height) / 2;
                 $dst_offset_X = 0;
             }
 
-            if ($src_height != $_height) {
-                $dst_height = $_height;
-                $dst_width = $_height * $srcProportions;
-                $dst_offset_X = ($_width - $dst_width) / 2;
+            if ($src_height != $height) {
+                $dst_height = $height;
+                $dst_width = $height * $srcProportions;
+                $dst_offset_X = ($width - $dst_width) / 2;
                 $dst_offset_Y = 0;
             }
 
-            if ($dst_width > $_width) {
-                $dst_width = $_width;
-                $dst_height = $_width / $srcProportions;
-                $dst_offset_Y = ($_height - $dst_height) / 2;
+            if ($dst_width > $width) {
+                $dst_width = $width;
+                $dst_height = $width / $srcProportions;
+                $dst_offset_Y = ($height - $dst_height) / 2;
                 $dst_offset_X = 0;
             }
 
-            if ($dst_height > $_height) {
-                $dst_height = $_height;
-                $dst_width = $_height * $srcProportions;
-                $dst_offset_X = ($_width - $dst_width) / 2;
+            if ($dst_height > $height) {
+                $dst_height = $height;
+                $dst_width = $height * $srcProportions;
+                $dst_offset_X = ($width - $dst_width) / 2;
                 $dst_offset_Y = 0;
             }
 
@@ -119,7 +119,7 @@ class LaraThumb
         }
 
         // Create new image
-        $image_p = imagecreatetruecolor($_width, $_height);
+        $image_p = imagecreatetruecolor($width, $height);
         if ($mode === 'cover') {
             $black_p = imagecolorallocate($image_p, 0, 0, 0);
             imagecolortransparent($image_p, $black_p);
@@ -166,13 +166,13 @@ class LaraThumb
 
 
     /**
-     * @param UploadedFile $_file
+     * @param UploadedFile $file
      * @return array
      */
-    public static function getOriginalSizes(UploadedFile $_file) :array
+    public static function getOriginalSizes(UploadedFile $file) :array
     {
-        $extension = strtolower($_file->extension());
-        $filename = $_file->path();
+        $extension = strtolower($file->extension());
+        $filename = $file->path();
 
         $src_width = 0;
         $src_height = 0;
