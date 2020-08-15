@@ -21,23 +21,37 @@ class LaraThumb
      * @param UploadedFile $file
      * @param integer $width
      * @param integer $height
-     * @param string [$mode] One of processing modes: "cover", "contain"
+     * @param string $mode One of processing modes: "cover", "contain"
+     * @param bool $saveOrientation
      * @author Alexander Kudrya <alexkudrya91@gmail.com>
      * @since 05.05.2018
      * @update 18.06.2018 Added contain mode
      * @update 03.03.2019 Fixed bug in cover mode
+     * @update 15.08.2020 Orientation save mode / Fix Orientation rotation bug
      *
      */
-    public static function processing(UploadedFile $file, int $width, int $height, string $mode = 'cover')
+    public static function processing(UploadedFile $file, int $width, int $height, string $mode = 'cover', bool $saveOrientation = false)
     {
         $extension = strtolower($file->extension());
         $filename = $file->path();
+
+        self::fixOrientation($filename, $extension);
 
         if (!in_array($mode, self::MODES)) {
             die ( "Invalid image processing mode." );
         }
 
         list ($src_width, $src_height) = self::getOriginalSizes($file);
+
+
+        // Orientation save mode
+
+        if ($saveOrientation and $width !== $height and $src_width !== $src_height) {
+            if (($width < $height and $src_width > $src_height) or ($width > $height and $src_width < $src_height)) {
+                list($width, $height) = array($height, $width);
+            }
+        }
+
 
         // Calculate new image sizes
 
@@ -169,7 +183,7 @@ class LaraThumb
      * @param UploadedFile $file
      * @return array
      */
-    public static function getOriginalSizes(UploadedFile $file) :array
+    protected static function getOriginalSizes(UploadedFile $file) :array
     {
         $extension = strtolower($file->extension());
         $filename = $file->path();
@@ -203,5 +217,36 @@ class LaraThumb
         }
 
         return [$src_width, $src_height];
+    }
+
+
+    /**
+     * @param string $filename
+     * @param string $extension
+     */
+    protected static function fixOrientation(string $filename, string $extension) {
+        $image = imagecreatefromstring(file_get_contents($filename));
+        $exif = exif_read_data($filename);
+        if(!empty($exif['Orientation'])) {
+            switch($exif['Orientation']) {
+                case 8:
+                    $image = imagerotate($image,90,0);
+                    break;
+                case 3:
+                    $image = imagerotate($image,180,0);
+                    break;
+                case 6:
+                    $image = imagerotate($image,270,0);
+                    break;
+            }
+        }
+
+        if ($extension == 'jpg' or $extension == 'jpeg') {
+            imagejpeg($image, $filename, 100);
+        } elseif ($extension == 'png') {
+            imagepng($image_p, $filename, 0);
+        } elseif ($extension == 'gif') {
+            imagegif($image_p, $filename);
+        }
     }
 }
