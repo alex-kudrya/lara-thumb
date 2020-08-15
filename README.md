@@ -20,7 +20,7 @@ class MakeThumbnail()
   public function run(Request $request, int $width = 100, int $height = 100)
   {
     $file = $request->file('image');
-    LaraThumb::processing($file, $width, $height, 'cover')
+    LaraThumb::processing($file, $width, $height, 'cover', false)
     
     // That's all, your image was reduced!
     // Then save the $file or do what you need with it...
