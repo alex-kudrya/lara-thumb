@@ -226,7 +226,7 @@ class LaraThumb
      */
     protected static function fixOrientation(string $filename, string $extension) {
         $image = imagecreatefromstring(file_get_contents($filename));
-        $exif = exif_read_data($filename);
+        $exif = @exif_read_data($filename);
         if(!empty($exif['Orientation'])) {
             switch($exif['Orientation']) {
                 case 8:
@@ -244,9 +244,9 @@ class LaraThumb
         if ($extension == 'jpg' or $extension == 'jpeg') {
             imagejpeg($image, $filename, 100);
         } elseif ($extension == 'png') {
-            imagepng($image_p, $filename, 0);
+            imagepng($image, $filename, 0);
         } elseif ($extension == 'gif') {
-            imagegif($image_p, $filename);
+            imagegif($image, $filename);
         }
     }
 }
